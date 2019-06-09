@@ -8,7 +8,8 @@
                 <Header @show="handleChangeshow"></Header>
             </el-header>
             <el-main>
-                <Maintitle></Maintitle>               
+                <Maintitle></Maintitle>
+                <router-view></router-view>               
             </el-main>
         </el-container>
     </el-container>
@@ -33,6 +34,9 @@ export default {
           handleChangeshow:function(){
               this.Show=!this.Show
           }
+      },
+      mounted(){
+          this.$router.push("/admin/goods-list")
       }
 }
 </script>
@@ -48,8 +52,7 @@ export default {
   .el-main {
     background-color: #E9EEF3;
     color: #333;
-    text-align: center;
-    line-height: 160px;
+   
   }
   
   body > .el-container {

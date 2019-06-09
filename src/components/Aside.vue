@@ -9,10 +9,18 @@
         <el-submenu index="1">
             <template slot="title">
             <i class="el-icon-location"></i>
-            <span>导航一</span>
+            <span>购物商城</span>
             </template>
-            <el-menu-item  index="1-1">选项1</el-menu-item >
-            <el-menu-item  index="1-2"> 选项1</el-menu-item >
+            <router-link to="/admin/goods-list">
+                <el-menu-item  index="1-1"> 
+                    商品列表
+                </el-menu-item >
+            </router-link>
+            <router-link to="/admin/category-list"> 
+                <el-menu-item  index="1-2">
+                 项目列表 
+                </el-menu-item >
+            </router-link>
       </el-submenu>
       <el-submenu index="2">
            <template slot="title">
@@ -59,5 +67,8 @@ export default {
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 200px;
   /* min-height: 400px; */
+}
+a{
+    text-decoration: none;
 }
 </style>

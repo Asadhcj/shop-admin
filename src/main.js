@@ -6,12 +6,39 @@ import axios from "axios"
 import VueRouter from "vue-router"
 import  Login from "./pages/Login.vue"
 import Admin from "./pages/Admin.vue"
+import Goodslist from "./pages/Goodslist.vue"
+import Categorylist from "./pages/Categorylist.vue"
 Vue.prototype.$axios=axios
 Vue.use(ElementUI)
 Vue.use(VueRouter)
 var routes=[
-    {path:"/",component:Admin},
-    {path:"/login",component:Login}
+    {
+      path:"/",
+      redirect:"/admin/goods-list",
+      meta:"首页"
+    },
+    {
+      path:"/login",
+      component:Login,
+      meta:"登录页"
+    },
+    {
+      path:"/admin",
+      component:Admin,
+      meta:"后台管理",
+      children:[
+        {
+          path:"goods-list",
+          component:Goodslist,
+          meta:"商品列表"
+        },
+        {
+          path:"category-list",
+          component:Categorylist,
+          meta:"项目列表"
+        }
+      ]
+    }
 ]
 var router=new VueRouter({routes})
 new Vue({
