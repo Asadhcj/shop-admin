@@ -2,14 +2,16 @@
     <div>
        <el-row type="flex" justify="space-between" >
            <div>
-               <el-button>新增</el-button>
+               <el-button @click="handleAddgoodspage">新增</el-button>
                <el-button type="danger"
                      @click="handleDeletes">
                      删除
                 </el-button>
            </div>
            <div class="input-serach">
-                <el-input placeholder="请输入内容" class="input-with-select" v-model="searchvalue">
+                <el-input placeholder="请输入内容" 
+                    class="input-with-select"
+                    v-model="searchvalue">
                         <el-button 
                             slot="append" 
                             icon="el-icon-search" 
@@ -99,11 +101,14 @@ export default {
         ids:[],
         pageIndex:1,
         pageSize:5,
-        total:30,
+        total:0,
         searchvalue:""
       }
     },
     methods:{
+        handleAddgoodspage(){
+            this.$router.push("/admin/Addgoods-list")
+        },
         handleSelectionChange(val){
             let arr=val.map(e=>{
                 return e.id
@@ -118,6 +123,7 @@ export default {
                 const data=res.data
                 this.tableData=data.message
                 this.total=data.totalcount
+               
             })
         },
         // 分页功能
@@ -136,8 +142,8 @@ export default {
                 this.searchvalue)
         },
         // 编辑事件
-        handleEdit(){
-           
+        handleEdit(val){
+           this.$router.push("/admin/Editgoods-list/"+val.id)
         },
         // 删除事件
         handleDelete(val){

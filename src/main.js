@@ -8,6 +8,8 @@ import  Login from "./pages/Login.vue"
 import Admin from "./pages/Admin.vue"
 import Goodslist from "./pages/Goodslist.vue"
 import Categorylist from "./pages/Categorylist.vue"
+import Addgoodslist from "./pages/Addgooslist.vue"
+import Editgoodslist from "./pages/Editgoodslist.vue"
 Vue.prototype.$axios=axios
 Vue.use(ElementUI)
 Vue.use(VueRouter)
@@ -36,6 +38,16 @@ var routes=[
           path:"category-list",
           component:Categorylist,
           meta:"项目列表"
+        },
+        {
+          path:"Addgoods-list",
+          component:Addgoodslist,
+          meta:"添加商品列表"
+        },
+        {
+          path:"Editgoods-list/:id",
+          component:Editgoodslist,
+          meta:"编辑商品列表"
         }
       ]
     }
