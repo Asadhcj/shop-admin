@@ -121,9 +121,13 @@ export default {
                 method:"GET",
             }).then((res)=>{
                 const data=res.data
-                this.tableData=data.message
+                this.tableData=data.message.map(e=>{
+                    return {
+                        ...e,
+                        imgurl:`http://localhost:8899/${e.img_url}`
+                    }
+                })
                 this.total=data.totalcount
-               
             })
         },
         // 分页功能

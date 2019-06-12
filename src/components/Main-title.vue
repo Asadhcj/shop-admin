@@ -41,7 +41,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
     .bottom{
         padding-bottom: 10px;
         border-bottom: 1px solid #666;

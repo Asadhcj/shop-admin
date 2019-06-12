@@ -60,7 +60,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .el-menu-vertical-demo {
   height: 100%;
 }

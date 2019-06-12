@@ -1,18 +1,18 @@
 <template>
-    <div class="box">
+   
        <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm form">
-          <el-form-item label="账号" prop="username">
+          <el-form-item class="search" label="账号" prop="username">
             <el-input v-model="ruleForm.username" class="input"></el-input>
           </el-form-item>
-          <el-form-item label="密码" prop="password">
+          <el-form-item class="search" label="密码" prop="password">
             <el-input type="password" v-model="ruleForm.password" autocomplete="off" class="input"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
-            <el-button @click="resetForm('ruleForm')">重置</el-button>
+            <el-button class="btn1" type="primary" @click="submitForm('ruleForm')">提交</el-button>
+            <el-button class="btn2" @click="resetForm('ruleForm')">重置</el-button>
           </el-form-item> 
        </el-form>
-    </div>
+   
 </template>
 
 <script>
@@ -96,6 +96,17 @@ a {
 }
 .input {
   width: 400px;
+}
+.search{
+ margin:20px auto; 
+}
+.btn1{
+  width: 40px;
+  height: 30px;
+}
+.btn2{
+  width: 45px;
+  height: 35px;
 }
 .box {
   width: 100%;

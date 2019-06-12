@@ -51,7 +51,7 @@
         </el-form-item>
         <el-form-item label="图片相册">
             <el-upload
-                action="http://localhost:8899/admin/article/uploadfile"
+                action="http://localhost:8899/admin/article/uploadimg"
                 list-type="picture-card"
                 :on-success="handlePictureSuccess"
                 :on-preview="handlePictureCardPreview"
@@ -152,7 +152,7 @@ export default {
         })
        this.form.fileList=files
       },
-      handlePictureCardPreview(){
+      handlePictureCardPreview(file){
         this.dialogImageUrl = file.url;
         this.dialogVisible = true;
       },
@@ -176,7 +176,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
  .avatar-uploader .el-upload {
     border: 1px dashed #d9d9d9;
     border-radius: 6px;

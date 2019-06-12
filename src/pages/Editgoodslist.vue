@@ -51,11 +51,12 @@
         </el-form-item>
         <el-form-item label="图片相册">
             <el-upload
-                action="http://localhost:8899/admin/article/uploadfile"
+                action="http://localhost:8899/admin/article/uploadimg"
                 list-type="picture-card"
                 :on-success="handlePictureSuccess"
                 :on-preview="handlePictureCardPreview"
-                :on-remove="handleRemove">
+                :on-remove="handleRemove"
+                :file-list="form.fileList">
                 <i class="el-icon-plus"></i>
                 </el-upload>
                     <el-dialog :visible.sync="dialogVisible">
@@ -107,14 +108,16 @@ export default {
         },
         categorys:[],
         imageUrl:"",
-        dialogImageUrl: '',
+        dialogImageUrl:'',
         dialogVisible: false
       }
     },
     methods: {
       onSubmit() {
+          const {id}=this.$route.params;
+        //   console.log(this.form.fileList)
           this.$axios({
-              url:"http://localhost:8899/admin/goods/add/goods",
+              url:"http://localhost:8899/admin/goods/edit/"+id,
               method:"POST",
               data:this.form,
                withCredentials: true
@@ -122,7 +125,6 @@ export default {
               const {status,message}=res.data
               if(status===0){
                   this.$message.success(message)
-                
                   setTimeout(()=>{
                     this.$router.back()
                   },2000)
@@ -135,7 +137,10 @@ export default {
       //上传封面图片成功
       handleAvatarSuccess(res, file, fileList){
         this.imageUrl = URL.createObjectURL(file.raw);
-        this.form.imgList.push(res)
+      const files=fileList.map(e=>{
+            return e.response
+        })
+       this.form.imgList=files
       },
       //上传图片前触发
       beforeAvatarUpload(file){
@@ -146,22 +151,19 @@ export default {
         return  isLt2M;
       },
       //上传多张图片成功后触发
-      handlePictureSuccess(res, file, fileList){
-        const files=fileList.map(e=>{
-            return e.response
-        })
-       this.form.fileList=files
+      handlePictureSuccess(res, file, fileList){ 
+        setTimeout(()=>{
+            res.uid= file.uid
+            this.form.fileList.push(res)
+        },200)
       },
-      handlePictureCardPreview(){
+       handlePictureCardPreview(file) {
         this.dialogImageUrl = file.url;
         this.dialogVisible = true;
       },
       //图片移除后触发
       handleRemove(file,fileList){
-         const files=fileList.map(e=>{
-            return e.response
-        })
-       this.form.fileList=files
+       this.form.fileList=fileList
       }
     },
     mounted(){
@@ -185,13 +187,20 @@ export default {
                 ...message,
                 // category_id转化为数字
                 category_id: +message.category_id,
-            }   
+                 fileList: message.fileList.map(v => {
+                    return {
+                        ...v,
+                        url: `http://localhost:8899${v.shorturl}`
+                    }
+                })
+            },
+            this.imageUrl=this.form.imgList[0].url 
         })
     }
 }
 </script>
 
-<style>
+<style scoped>
  .avatar-uploader .el-upload {
     border: 1px dashed #d9d9d9;
     border-radius: 6px;
