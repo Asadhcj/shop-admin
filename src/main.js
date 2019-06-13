@@ -10,6 +10,7 @@ import Goodslist from "./pages/Goodslist.vue"
 import Categorylist from "./pages/Categorylist.vue"
 import Addgoodslist from "./pages/Addgooslist.vue"
 import Editgoodslist from "./pages/Editgoodslist.vue"
+import store from "./vuex/index"
 Vue.prototype.$axios=axios
 Vue.use(ElementUI)
 Vue.use(VueRouter)
@@ -78,5 +79,6 @@ router.beforeEach((to,from,next)=>{
 })
 new Vue({
   router,
+  store,
   render: h => h(App),
 }).$mount('#app')

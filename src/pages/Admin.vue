@@ -35,9 +35,9 @@ export default {
               this.Show=!this.Show
           }
       },
-      mounted(){
-          this.$router.push("/admin/goods-list")
-      }
+    //   mounted(){
+    //       this.$router.push("/admin/goods-list")
+    //   }
 }
 </script>
 

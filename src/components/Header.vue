@@ -8,7 +8,9 @@
                  <i class="el-icon-right"></i>
             </div>
             <div>
-                admin 超级管理员 退出
+                <span>{{user.uname}}——</span>
+                <span>{{user.realname}}——</span>
+                <button class="btn" @click="handlesingleout">退出</button>
             </div>
         </el-row>
     </div>
@@ -20,6 +22,7 @@ export default {
             return {
                 show:true,
                 hidden:false,
+                user:{}
             }
         },
         methods:{
@@ -27,7 +30,26 @@ export default {
                 this.show=!this.show
                 this.hidden=!this.hidden
                 this.$emit("show")
+            },
+            handlesingleout(){
+                this.$axios({
+                    url:"http://localhost:8899/admin/account/logout",
+                    method:"GET",
+                    withCredentials: true
+                }).then(res=>{
+                    const {status,message}=res.data
+                    if(status==0){
+                        this.$message.success(message)
+                        setTimeout(()=>{
+                            this.$router.push("/login")
+                        },2000)
+                        window.localStorage.removeItem("users")
+                    }
+                })
             }
+        },
+        mounted(){
+            this.user=this.$store.state.user
         }
 }
 </script>
@@ -40,5 +62,11 @@ export default {
     .arrow{
         cursor: pointer;
         font-size: 20px;
+    }
+    .btn{
+      background-color:#fff;
+      border:none;
+      font-size: 16px;
+      cursor: pointer;
     }
 </style>

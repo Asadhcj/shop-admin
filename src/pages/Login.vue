@@ -67,6 +67,7 @@ export default {
               });
             }
             if (status === 0) {
+              this.$store.commit("setuser",message)
              this.$router.push("/")
             }
           });
